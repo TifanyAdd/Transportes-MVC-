@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transportes MVC", "Transportes MVC.csproj", "{D4048E08-2936-42E3-A297-73EF826A6104}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{CF9CE975-3F52-44CB-8680-5980D2E2CD7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D4048E08-2936-42E3-A297-73EF826A6104}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4048E08-2936-42E3-A297-73EF826A6104}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4048E08-2936-42E3-A297-73EF826A6104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF9CE975-3F52-44CB-8680-5980D2E2CD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9CE975-3F52-44CB-8680-5980D2E2CD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9CE975-3F52-44CB-8680-5980D2E2CD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9CE975-3F52-44CB-8680-5980D2E2CD7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
