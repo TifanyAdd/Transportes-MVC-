@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Transportes_MVC.Models.Rutas>
+
+<h2>@ViewBag.Titulo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_salida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_llegadareal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_llegadaestimada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Camiones.Matricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Choferes.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direcciones.Calle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direcciones1.Calle)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Fecha_salida)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Fecha_llegadareal)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Fecha_llegadaestimada)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Camiones.Matricula)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Choferes.Nombre)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Direcciones.Calle)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.Direcciones1.Calle)
+            </th>
+        </tr>
+    }
+</table>
+

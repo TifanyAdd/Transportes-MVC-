@@ -26,5 +26,12 @@ namespace Transportes_MVC.Models
         }
     
         public virtual DbSet<Camiones> Camiones { get; set; }
+        public virtual DbSet<bitacora_camiones> bitacora_camiones { get; set; }
+        public virtual DbSet<Cargamentos> Cargamentos { get; set; }
+        public virtual DbSet<Choferes> Choferes { get; set; }
+        public virtual DbSet<Direcciones> Direcciones { get; set; }
+        public virtual DbSet<Rutas> Rutas { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Vista_Rutas> Vista_Rutas { get; set; }
     }
 }

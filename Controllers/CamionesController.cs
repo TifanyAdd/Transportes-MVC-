@@ -1,6 +1,7 @@
 ﻿using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Transportes_MVC.Models;
+using static Transportes_MVC.Models.Enum;
 
 namespace Transportes_MVC.Controllers
 {
@@ -118,7 +120,7 @@ namespace Transportes_MVC.Controllers
                 return View(model);
             }
         }
-        
+
         //GET: Editar_Camion/{id}
 
         public ActionResult Editar_Camion(int id)
@@ -143,20 +145,20 @@ namespace Transportes_MVC.Controllers
 
                     //Bajo consulta
 
-                        camion = (from c in contex.Camiones
-                                  where c.ID_Camion == id
-                                  select new Camiones_DTO()
-                                  {
-                                      ID_Camion = c.ID_Camion,
-                                      Matricula = c.Matricula,
-                                      Marca = c.Marca,
-                                      Modelo = c.Modelo,
-                                      Tipo_Camion = c.Tipo_Camion,
-                                      Capacidad = c. Capacidad,
-                                      Kilometraje = c. Kilometraje,
-                                      Disponibilidad = c.Disponibilidad,
-                                      UrlFoto = c.UrlFoto
-                                  }).FirstOrDefault();
+                    camion = (from c in contex.Camiones
+                              where c.ID_Camion == id
+                              select new Camiones_DTO()
+                              {
+                                  ID_Camion = c.ID_Camion,
+                                  Matricula = c.Matricula,
+                                  Marca = c.Marca,
+                                  Modelo = c.Modelo,
+                                  Tipo_Camion = c.Tipo_Camion,
+                                  Capacidad = c.Capacidad,
+                                  Kilometraje = c.Kilometraje,
+                                  Disponibilidad = c.Disponibilidad,
+                                  UrlFoto = c.UrlFoto
+                              }).FirstOrDefault();
                 } //cierre de using (contex)
 
                 if (camion != null)
@@ -178,7 +180,7 @@ namespace Transportes_MVC.Controllers
             }
         }
 
-        //POST: Nuevo_Camion
+        //POST: Editar_Camion
         [HttpPost]
         public ActionResult Editar_Camion(Camiones_DTO model, HttpPostedFileBase imagen)
         {
@@ -308,6 +310,45 @@ namespace Transportes_MVC.Controllers
                 return View(model);
             }
         }
+        //GET: Eliminar Camión
+        public ActionResult Eliminar_Camion(int id)
+        {
+            try
+            {
+                using (TransportesEntities context = new TransportesEntities())
+                {
+                    Camiones _camion = context.Camiones.Where(x => x.ID_Camion == id).FirstOrDefault();
+
+                    //validar si realmente traje un camion
+                    if (_camion != null)
+                    {
+                        //puedo eliminar
+                        context.Camiones.Remove(_camion);
+                        context.SaveChanges();
+                        //sweet alert
+                        SweetAlert("Eliminado", "Camión eliminado con éxito", NotificationType.success);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        SweetAlert("No Encontrado", $"No hemos encontrado el camión con identificador {id}", NotificationType.info);
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Sweet Alert
+                SweetAlert("Opsss...", $"Ha ocurrido un Error: {ex.Message}", NotificationType.error);
+                return RedirectToAction("Index");
+            }
+        }
+        //Get: ConfirmarEliminar
+        public ActionResult Confirmar_Eliminar(int id)
+        {
+            SweetAlert_Eliminar(id);
+            return RedirectToAction("Index");
+        }
 
 
         #region Auxiliares
@@ -328,5 +369,45 @@ namespace Transportes_MVC.Controllers
             ViewBag.ListaTipos = lista_opciones;
         }
         #endregion
+
+        #region Sweet Alert
+        private void SweetAlert(string title, string msg, NotificationType type)
+        {
+            var script = "<script languaje='javascript'> " +
+                         "Swal.fire({" +
+                         "title: '" + title + "'," +
+                         "text: '" + msg + "'," +
+                         "icon: '" + type + "'" +
+                         "});" +
+                         "</script>";
+
+            //TempData funciona como un viewBag, pasando información del controlador a cualquier parte de mi proyecto, siendo este más observable y con un tiempo de vida similar
+            TempData["sweetalert"] = script;
+        }
+
+        private void SweetAlert_Eliminar(int id)
+        {
+            var script = "<script languaje='javascript'>" +
+                "Swal.fire({" +
+                "title: '¿Estás Seguro?'," +
+                "text: 'Estás apunto de Eliminar el Camión: " + id.ToString() + "'," +
+                "icon: 'info'," +
+                "showDenyButton: true," +
+                "showCancelButton: true," +
+                "confirmButtonText: 'Eliminar'," +
+                "denyButtonText: 'Cancelar'" +
+                "}).then((result) => {" +
+                "if (result.isConfirmed) {  " +
+                "window.location.href = '/Camiones/Eliminar_Camion/" + id + "';" +
+                "} else if (result.isDenied) {  " +
+                "Swal.fire('Se ha cancelado la operación','','info');" +
+                "}" +
+                "});" +
+                "</script>";
+
+            TempData["sweetalert"] = script;
+        }
+
     }
+    #endregion
 }

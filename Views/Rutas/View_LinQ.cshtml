@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DTO.View_Rutas_DTO>
+
+<h2>@ViewBag.Titulo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.C_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado_Origen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado_Destino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Chofer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Camion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Llegadaestimada)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.C_)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Cargamento)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Origen)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Estado_Origen)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Destino)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Estado_Destino)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Chofer)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Camion)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Salida)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Llegadaestimada)
+            </th>
+        </tr>
+    }
+</table>
